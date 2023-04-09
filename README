@@ -1,4 +1,4 @@
 pip install -r requirments.txt
 antlr4-parse battle_dot.g4 start -tree test.bdot 
-
+antlr4 -Dlanguage=Python3 -visitor battle_dot.g4
 
