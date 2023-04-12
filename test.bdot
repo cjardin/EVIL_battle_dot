@@ -1,5 +1,5 @@
 dot_name: mydot;
-dot_emoji: 💩;
+dot_emoji: 🥷;
 on_start: rumba ();
 on_spawn: killer () -> all;
 on_start: rumba ( 4.0 );
