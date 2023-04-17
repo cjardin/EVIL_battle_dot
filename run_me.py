@@ -13,8 +13,6 @@ def main():
     tree = parser.start()
     print(tree.toStringTree(recog=parser))
     visitor.visit(tree)
-   
-    time.sleep(2)
 
 if __name__ == '__main__':
     main()

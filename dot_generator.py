@@ -10,6 +10,10 @@ class dot_generator(battle_dotVisitor):
     def __init__(self):
         super(battle_dotVisitor, self).__init__()
 
+    def __del__(self):
+        print('all done')
+        return
+
     def visitStart(self, ctx:battle_dotParser.StartContext):
         print(1)
         return super().visitStart(ctx)
