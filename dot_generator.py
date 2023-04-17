@@ -26,6 +26,8 @@ class dot_generator(battle_dotVisitor):
 
     def visitDot_name(self, ctx:battle_dotParser.Dot_nameContext):
         print(3)
+        print(ctx)
+        #print(ctx.NAME_ID())
         return super().visitDot_name(ctx)
 
 
