@@ -13,7 +13,7 @@ on_stmt : ON_STMT_NAMES ':'  BEHAVIOR_NAMES  '(' (VALUE (',' VALUE)*)?  ')'  ('-
 
 
 ON_STMT_NAMES : 'on_start' | 'on_spawn';
-BEHAVIOR_NAMES : 'rumba' | 'killer';
+BEHAVIOR_NAMES : 'rumba' | 'killer' | 'lizzard_man';
 TARGETS : 'all' | 'new' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
 EMOJI : [\p{Emoji}] ;
