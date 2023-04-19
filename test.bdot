@@ -1,8 +1,0 @@
-dot_name: mydot;
-dot_emoji: 🥷;
-on_start: rumba ();
-on_spawn: killer () -> all;
-on_start: rumba ( 4.0 );
-on_start: rumba ( 4.0 , 3.3 ) -> all;
-on_start: rumba ( 4.0 , 3.3, 5.5 ) -> all;
-

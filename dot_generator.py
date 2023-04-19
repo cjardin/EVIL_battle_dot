@@ -5,39 +5,55 @@ if __name__ is not None and "." in __name__:
 else:
     from battle_dotParser import battle_dotParser
 
+import json
+
 class dot_generator(battle_dotVisitor):
 
     def __init__(self):
+        self.prog = {"onEvents": {} }
         super(battle_dotVisitor, self).__init__()
 
     def __del__(self):
-        print('all done')
+        print(self.prog)
         return
 
     def visitStart(self, ctx:battle_dotParser.StartContext):
-        print(1)
         return super().visitStart(ctx)
 
 
     def visitProg(self, ctx:battle_dotParser.ProgContext):
-        print(2)
         return super().visitProg(ctx)
 
 
     def visitDot_name(self, ctx:battle_dotParser.Dot_nameContext):
-        print(3)
-        print(ctx)
-        #print(ctx.NAME_ID())
+        self.prog['dot_name'] = str(ctx.NAME_ID())
+        
         return super().visitDot_name(ctx)
 
 
     def visitDot_emoji(self, ctx:battle_dotParser.Dot_emojiContext):
-        print(4)
+        self.prog['dot_emoji'] = str(ctx.EMOJI())
         return super().visitDot_emoji(ctx)
 
 
     def visitOn_stmt(self, ctx:battle_dotParser.On_stmtContext):
-        print(5)
+
+        self.prog['onEvents'][str(ctx.ON_STMT_NAMES())] = {}
+
+        self.prog['onEvents'][str(ctx.ON_STMT_NAMES())]['actor'] = str(ctx.BEHAVIOR_NAMES())
+
+        self.prog['onEvents'][str(ctx.ON_STMT_NAMES())]['params'] = []
+        i = 0
+        while True:
+            v = ctx.VALUE(i) 
+            if v == None:
+                break
+            self.prog['onEvents'][str(ctx.ON_STMT_NAMES())]['params'].append(float( str(v) ))
+            i += 1
+
+        if ctx.TARGETS() != None:
+            self.prog['onEvents'][str(ctx.ON_STMT_NAMES())]['target'] = str(ctx.TARGETS())
+
         return super().visitOn_stmt(ctx)
 
 
