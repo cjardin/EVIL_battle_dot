@@ -14,7 +14,9 @@ class dot_generator(battle_dotVisitor):
         super(battle_dotVisitor, self).__init__()
 
     def __del__(self):
-        print(self.prog)
+        with open(f"compiled_players/{self.prog['dot_name']}.json", 'wb') as f:
+            f.write( json.dumps(self.prog, indent=4, ensure_ascii=False).encode('utf8') )
+
         return
 
     def visitStart(self, ctx:battle_dotParser.StartContext):
@@ -32,7 +34,8 @@ class dot_generator(battle_dotVisitor):
 
 
     def visitDot_emoji(self, ctx:battle_dotParser.Dot_emojiContext):
-        self.prog['dot_emoji'] = str(ctx.EMOJI())
+        f = str(ctx.EMOJI())
+        self.prog['dot_emoji'] = f
         return super().visitDot_emoji(ctx)
 
 
