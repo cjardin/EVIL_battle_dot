@@ -22,127 +22,146 @@ import uuid
 import traceback
 
 
-dot_objects = {}
-def get_new_dot(dna):
-    did = str(uuid.uuid4())
-    dot_objects[did] = {}
-    return did 
-
-
+from dot_actor import dot_actor
 
 #Creating and Configuring Logger
-
 Log_Format = "%(levelname)s %(asctime)s - %(message)s"
-
 logging.basicConfig(filename = "logfile.log",
                     filemode = "w",
                     format = Log_Format, 
-                    level = logging.ERROR)
+                    level = logging.DEBUG)
 
 logger = logging.getLogger()
-
 #Testing our Logger
+logger.debug("Game start")
 
-logger.error("Our First Log Message")
 
-
+#load configs
 configs = None
 with open('battleDots.yml', 'r') as file:
     configs  = yaml.safe_load(file)
 
+
+#load the database
 #del the db each play
 try:
     os.unlink(configs['env']['dbfile'])
 except:
     pass
-
 con = sqlite3.connect(configs['env']['dbfile'])
 
 GAME_WIDTH = configs['env']['width']
 GAME_HEIGHT = configs['env']['height']
 
-cur = con.cursor()
-for sql in configs['sql']['setup']:
-    cur.execute(sql)
 
-for i in range( int( (GAME_WIDTH * GAME_HEIGHT) * configs['env']['food_amount'])):
-    cur.execute(configs['sql']['place_food'].replace('!!X', str(randint(0,GAME_WIDTH))).replace('!!Y', str(randint(0,GAME_HEIGHT)) ))
+#------------------------------------------
+dot_objects = {}
+def get_new_dot(dna):
+    did = str(uuid.uuid4())
+    dot_objects[did] = dot_actor(dna, did)
+    return did 
 
-good_players = []
-for g in glob(configs['env']['player_dir'], recursive = True):
-    try:
-        dot_dna = {}
-        with open(g, 'rb') as f:
-            dot_dna = json.loads(f.read())
+def setup_game():
+    cur = con.cursor()
+    for sql in configs['sql']['setup']:
+        cur.execute(sql)
+    for i in range( int( (GAME_WIDTH * GAME_HEIGHT) * configs['env']['food_amount'])):
+        cur.execute(configs['sql']['place_food'].replace('!!X', str(randint(0,GAME_WIDTH))).replace('!!Y', str(randint(0,GAME_HEIGHT)) ))
 
-        init_pos = (randint(0,GAME_WIDTH), randint(0,GAME_HEIGHT))
-        p ={  "name" : dot_dna['dot_name'], "dot_char": dot_dna['dot_emoji'],
-            "flag_x_y" : init_pos, "init_pos" : init_pos,
-            "state" : {
-                        "MAX_X" : GAME_WIDTH,
-                        "MAX_Y" : GAME_HEIGHT,
-                        "NAME"  : dot_dna['dot_name'],
-                        "DNA"   : dot_dna
-                    } 
-        }
-        
-        good_players.append(p)
-        cur.execute( configs['sql']['del_initl_pos'].replace('!!X', str( init_pos[0]  )).replace('!!Y', str(init_pos[1])))
-        cur.execute( configs['sql']['new_player'].replace("!!id", str( len(good_players) )).replace( "!!name", dot_dna['dot_name']).replace("!!char", 
+
+def load_players():
+    cur = con.cursor()
+    player_count = 1 # 0 = food 
+    for g in glob(configs['env']['player_dir'], recursive = True):
+        try:
+            dot_dna = {}
+            with open(g, 'rb') as f:
+                dot_dna = json.loads(f.read())
+
+            init_pos = (randint(0,GAME_WIDTH), randint(0,GAME_HEIGHT))
+            dot_dna["MAX_X"] = GAME_WIDTH
+            dot_dna["MAX_Y"] = GAME_HEIGHT
+            dot_dna["flag_x_y"] = init_pos
+            dot_dna["init_pos"] = init_pos
+
+            dot_obj_id = get_new_dot(dot_dna)
+            cur.execute( configs['sql']['del_initl_pos'].replace('!!X', str( init_pos[0]  )).replace('!!Y', str(init_pos[1])))
+            cur.execute( configs['sql']['new_player'].replace("!!id", str( player_count )).replace( "!!name", dot_dna['dot_name']).replace("!!char", 
                     dot_dna['dot_emoji'])  )
-        cur.execute( configs['sql']['set_flag'].replace('!!X', str( init_pos[0]  )).replace('!!Y', str(init_pos[1])).replace('!!_name', dot_dna['dot_name']))
-        cur.execute( configs['sql']['set_initial_pos'].replace('!!X', str( init_pos[0]  )).replace('!!Y',
-                str(init_pos[1])).replace('!!_name', dot_dna['dot_name']).replace("!!UUID", get_new_dot(dot_dna) ))
-    except Exception as ex:
-        print(ex)
-        print( traceback.format_exc())
-        sys.exit()
+            cur.execute( configs['sql']['set_flag'].replace('!!X', str( init_pos[0]  )).replace('!!Y', str(init_pos[1])).replace('!!_name', dot_dna['dot_name']))
+            cur.execute( configs['sql']['set_initial_pos'].replace('!!X', str( init_pos[0]  )).replace('!!Y',
+                str(init_pos[1])).replace('!!_name', dot_dna['dot_name']).replace("!!UUID", dot_obj_id ))
+            player_count += 1
+        except Exception as ex:
+            print(ex)
+            print( traceback.format_exc())
+            sys.exit()
 
-print(good_players)
-sys.exit()
+def post_event(event, dot_id):
+    dot_objects[ dot_id ].post_event( event )
 
-def demo(screen):
+def play_game(screen):
+    cur = con.cursor()
     while True:
         screen.clear()
         for row in cur.execute(configs['sql']['get_all_screen_to_print']):
             screen.print_at(row[2] , row[0], row[1], colour=7)
         screen.refresh()
 
-        shuffle(good_players)
-        for p in good_players:
-            p['module'].run(cur, p['state'])
-    
+        dot_keys = dot_objects.keys()
+        shuffle( list(dot_keys) )
+        for did in dot_keys:
+            continue 
+            dot_objects[did].update(cur)
+   
+            # This query also limits movment to a distance of 1 
             cur.execute(configs['sql']['get_move_actions'].replace('!!max_x', str(GAME_WIDTH)).replace('!!max_y', str(GAME_HEIGHT) ))
             actions = cur.fetchall()
             for row in actions:
                 skip_insert = False
-                #should be in the yml.. but I miss f :)
-                cur.execute(f"select name, is_flag from main_game_field as a, owner b  where a.owner_id = b.owner_id and X = {row[0]} and Y = {row[1]}")
+                #should be in the yml.. but I miss f :) post_event
+                cur.execute(f"select name, is_flag, d_id from main_game_field as a, owner b  where a.owner_id = b.owner_id and X = {row[0]} and Y = {row[1]}")
                 collisions = cur.fetchall()
                 for c_row in collisions:
                     if c_row[0] == 'Food':
-                        cur.execute(f"insert into main_game_field values ( {p['flag_x_y'][0]}, {p['flag_x_y'][1]}, (select owner_id from owner where name='{p['module_name']}') , FALSE)")
+                        #spawn
+                        #n_did = get_new_dot(   dot_objects[ row[4] ].dna  )
+                        #cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
+                        #            (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') , FALSE, '{n_did}' )""")
                         cur.execute(f"delete from main_game_field where X = {row[0]} and Y = {row[1]} and owner_id = (select owner_id from owner where name='Food') ")
-                    elif c_row[0] == p['module_name']:
-                        #we bouncs
+
+                        post_event('on_food', row[4])    
+                
+                    elif c_row[0] == dot_objects[ row[4] ].dna['dot_name']:
+                        #We hit a team member
                         pass
                     elif c_row[1] == 1:
                         #Got a FLAG!!!
-                        print(111)
+                        pass
                     else:
                         #combat 50/50 chance of winning :)
                         if random.choice( [True, False]):
                             skip_insert = True
+                            post_event('on_lost_a_battle', row[4])
+                            del dot_objects[ row[4] ]
                             cur.execute(f"delete from main_game_field where owner_id = (select owner_id from owner where name='{p['module_name']}')  and X = {row[0]} and Y = {row[1]} and is_flag = FALSE")
                         else:
                             cur.execute(f"delete from main_game_field where owner_id = (select owner_id from owner where name='{c_row[0]}')  and X = {row[0]} and Y = {row[1]} and is_flag = FALSE")
 
                     
                 if skip_insert == False:
-                    cur.execute(f"update main_game_field set X = {row[2]} , Y = {row[3]} where owner_id = (select owner_id from owner where name='{p['module_name']}') and X = {row[0]} and Y = {row[1]} and is_flag = FALSE")
+                    cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where 
+                        owner_id = (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') and X = {row[0]} and Y = {row[1]} and is_flag = FALSE""")
             cur.execute("delete from engine_orders")
         time.sleep(.1)
         con.commit()
 
-Screen.wrapper(demo)
+
+
+
+
+#Not in a __main__ becuase I don't want this to ever be  imported :)
+setup_game()
+load_players()
+Screen.wrapper(play_game)
 
