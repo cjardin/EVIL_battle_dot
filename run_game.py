@@ -57,10 +57,19 @@ GAME_HEIGHT = configs['env']['height']
 
 #------------------------------------------
 dot_objects = {}
-def get_new_dot(dna):
+dot_score_board = {}
+def get_new_dot(dna, dot_name):
     did = str(uuid.uuid4())
     dot_objects[did] = dot_actor(dna, did)
+
+    if dot_name not in dot_score_board:
+        dot_score_board[dot_name] = {
+            "kills" : 0,
+            "food" : 0,
+            "alive" : 1
+        }
     return did 
+
 
 def setup_game():
     cur = con.cursor()
@@ -85,7 +94,7 @@ def load_players():
             dot_dna["flag_x_y"] = init_pos
             dot_dna["init_pos"] = init_pos
 
-            dot_obj_id = get_new_dot(dot_dna)
+            dot_obj_id = get_new_dot(dot_dna, dot_dna['dot_name'])
             cur.execute( configs['sql']['del_initl_pos'].replace('!!X', str( init_pos[0]  )).replace('!!Y', str(init_pos[1])))
             cur.execute( configs['sql']['new_player'].replace("!!id", str( player_count )).replace( "!!name", dot_dna['dot_name']).replace("!!char", 
                     dot_dna['dot_emoji'])  )
@@ -135,11 +144,15 @@ def play_game(screen):
                         continue 
                     elif c_row[0] == 'Food':
                         #spawn
-                        n_did = get_new_dot(   dot_objects[ row[4] ].dna  )
+                        n_did = get_new_dot(   dot_objects[ row[4] ].dna, dot_objects[ row[4] ].dna['dot_name'] )
+                        
                         cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
                                     (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') , FALSE, '{n_did}' )""")
                         cur.execute(f"delete from main_game_field where X = {row[0]} and Y = {row[1]} and owner_id = (select owner_id from owner where name='Food') ")
                         post_event('on_spawn', row[4])    
+
+                        dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['food'] = dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['food'] + 1
+                        dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['alive'] = dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['alive'] + 1
                 
                     elif c_row[0] == dot_objects[ row[4] ].dna['dot_name']:
                         #We hit a team member
@@ -152,13 +165,17 @@ def play_game(screen):
                         if random.choice( [True, False]):
                             skip_insert = True
                             post_event('on_lost_a_battle', row[4])
-                            del dot_objects[ row[4] ]
                             deleted.append( row[4] )
                             cur.execute(f"delete from main_game_field where d_id = '{row[4]}'")
+                            dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['kills'] = dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['kills'] + 1
+                            dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['alive'] = dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['alive'] - 1
+                            del dot_objects[ row[4] ]
                         else:
                             cur.execute(f"delete from main_game_field where d_id = '{c_row[2]}'");
-                            del dot_objects[ c_row[2] ]
                             deleted.append( c_row[2] )
+                            dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['kills'] = dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['kills'] + 1
+                            dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['alive'] = dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['alive'] - 1
+                            del dot_objects[ c_row[2] ]
                     
                 if skip_insert == False:
                     cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where d_id = '{did}'""")
@@ -166,6 +183,7 @@ def play_game(screen):
         if time.time() - loop_start < .5:
             time.sleep(.1)
         con.commit()
+        logger.debug(json.dumps(dot_score_board, indent=4))
 
 
 
