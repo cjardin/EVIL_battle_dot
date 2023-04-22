@@ -113,19 +113,27 @@ def play_game(screen):
         dot_keys = list(dot_objects.keys())
         shuffle( dot_keys )
         logger.debug(len(dot_keys))
+        deleted = []
         for did in dot_keys:
+            if did in deleted:
+                continue
             dot_objects[did].update(cur)
    
             # This query also limits movment to a distance of 1 
             cur.execute(configs['sql']['get_move_actions'].replace('!!max_x', str(GAME_WIDTH)).replace('!!max_y', str(GAME_HEIGHT) ))
             actions = cur.fetchall()
             for row in actions:
+                if row[4] in deleted:
+                    continue
+
                 skip_insert = False
                 #should be in the yml.. but I miss f :) post_event
                 cur.execute(f"select name, is_flag, d_id from main_game_field as a, owner b  where a.owner_id = b.owner_id and X = {row[0]} and Y = {row[1]}")
                 collisions = cur.fetchall()
                 for c_row in collisions:
-                    if c_row[0] == 'Food':
+                    if row[4] in deleted:
+                        continue 
+                    elif c_row[0] == 'Food':
                         #spawn
                         n_did = get_new_dot(   dot_objects[ row[4] ].dna  )
                         cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
@@ -145,9 +153,12 @@ def play_game(screen):
                             skip_insert = True
                             post_event('on_lost_a_battle', row[4])
                             del dot_objects[ row[4] ]
-                            cur.execute(f"delete from main_game_field where d_id = '{did}'")
+                            deleted.append( row[4] )
+                            cur.execute(f"delete from main_game_field where d_id = '{row[4]}'")
                         else:
                             cur.execute(f"delete from main_game_field where d_id = '{c_row[2]}'");
+                            del dot_objects[ c_row[2] ]
+                            deleted.append( c_row[2] )
                     
                 if skip_insert == False:
                     cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where d_id = '{did}'""")

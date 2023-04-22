@@ -11,8 +11,12 @@ class dot_actor:
         self.new_behavior('on_start')
 
     def new_behavior(self, event_name):
-        self.behavior = importlib.import_module( f"behaviors.{self.dna['onEvents'][event_name]['actor']}")
-        self.behavior_state = {}
+        try:
+            self.behavior = importlib.import_module( f"behaviors.{self.dna['onEvents'][event_name]['actor']}")
+            self.behavior_state = {}
+        except:
+            #behavior did not support event
+            pass
 
     def update(self, db_cursor):
         #get all my dots

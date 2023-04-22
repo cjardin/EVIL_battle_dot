@@ -3,15 +3,18 @@ from battle_dotLexer import battle_dotLexer
 from battle_dotParser import battle_dotParser
 from dot_generator import dot_generator
 import time
+import glob
 
 def main():
-    lexer = battle_dotLexer (FileStream("players/test.bdot", encoding='utf-8'))
-    token_stream = CommonTokenStream(lexer)
-    parser = battle_dotParser(token_stream)
-    visitor = dot_generator()
+     for f in glob.glob("players/*.bdot"):
+        print(f)
+        lexer = battle_dotLexer (FileStream(f, encoding='utf-8'))
+        token_stream = CommonTokenStream(lexer)
+        parser = battle_dotParser(token_stream)
+        visitor = dot_generator()
     
-    tree = parser.start()
-    visitor.visit(tree)
+        tree = parser.start()
+        visitor.visit(tree)
 
 if __name__ == '__main__':
     main()
