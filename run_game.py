@@ -109,7 +109,8 @@ def play_game(screen):
         screen.refresh()
 
         dot_keys = list(dot_objects.keys())
-        #shuffle( list(dot_keys) )
+        shuffle( dot_keys )
+        logger.debug(len(dot_keys))
         for did in dot_keys:
             dot_objects[did].update(cur)
    
@@ -128,7 +129,6 @@ def play_game(screen):
                         cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
                                     (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') , FALSE, '{n_did}' )""")
                         cur.execute(f"delete from main_game_field where X = {row[0]} and Y = {row[1]} and owner_id = (select owner_id from owner where name='Food') ")
-
                         post_event('on_spawn', row[4])    
                 
                     elif c_row[0] == dot_objects[ row[4] ].dna['dot_name']:
@@ -143,14 +143,12 @@ def play_game(screen):
                             skip_insert = True
                             post_event('on_lost_a_battle', row[4])
                             del dot_objects[ row[4] ]
-                            cur.execute(f"delete from main_game_field where owner_id = (select owner_id from owner where name='{p['module_name']}')  and X = {row[0]} and Y = {row[1]} and is_flag = FALSE")
+                            cur.execute(f"delete from main_game_field where d_id = '{did}'")
                         else:
-                            cur.execute(f"delete from main_game_field where owner_id = (select owner_id from owner where name='{c_row[0]}')  and X = {row[0]} and Y = {row[1]} and is_flag = FALSE")
-
+                            cur.execute(f"delete from main_game_field where d_id = '{c_row[2]}'");
                     
                 if skip_insert == False:
-                    cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where 
-                        owner_id = (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') and X = {row[0]} and Y = {row[1]} and is_flag = FALSE""")
+                    cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where d_id = '{did}'""")
             cur.execute("delete from engine_orders")
         time.sleep(.1)
         con.commit()
