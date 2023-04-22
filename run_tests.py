@@ -8,7 +8,7 @@ import glob
 
 def main():
 
-    for f in glob.glob("tests/*.bdot"):
+    for f in glob.glob("test_progs/*.bdot"):
         print (f)
         lexer = battle_dotLexer (FileStream(f, encoding='utf-8'))
         token_stream = CommonTokenStream(lexer)
