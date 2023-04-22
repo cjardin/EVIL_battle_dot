@@ -1,13 +1,13 @@
 {
     "onEvents": {
         "on_start": {
-            "actor": "rumba",
+            "actor": "killer",
             "params": [
                 1.1
             ]
         },
         "on_spawn": {
-            "actor": "killer",
+            "actor": "rumba",
             "params": [
                 1.2,
                 1.3

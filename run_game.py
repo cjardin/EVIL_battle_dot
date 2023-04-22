@@ -108,10 +108,9 @@ def play_game(screen):
             screen.print_at(row[2] , row[0], row[1], colour=7)
         screen.refresh()
 
-        dot_keys = dot_objects.keys()
-        shuffle( list(dot_keys) )
+        dot_keys = list(dot_objects.keys())
+        #shuffle( list(dot_keys) )
         for did in dot_keys:
-            continue 
             dot_objects[did].update(cur)
    
             # This query also limits movment to a distance of 1 
@@ -125,12 +124,12 @@ def play_game(screen):
                 for c_row in collisions:
                     if c_row[0] == 'Food':
                         #spawn
-                        #n_did = get_new_dot(   dot_objects[ row[4] ].dna  )
-                        #cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
-                        #            (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') , FALSE, '{n_did}' )""")
+                        n_did = get_new_dot(   dot_objects[ row[4] ].dna  )
+                        cur.execute(f"""insert into main_game_field values ( {dot_objects[ row[4] ].dna['flag_x_y'][0]}, {dot_objects[ row[4] ].dna ['flag_x_y'][1]}, 
+                                    (select owner_id from owner where name='{dot_objects[ row[4] ].dna['dot_name']}') , FALSE, '{n_did}' )""")
                         cur.execute(f"delete from main_game_field where X = {row[0]} and Y = {row[1]} and owner_id = (select owner_id from owner where name='Food') ")
 
-                        post_event('on_food', row[4])    
+                        post_event('on_spawn', row[4])    
                 
                     elif c_row[0] == dot_objects[ row[4] ].dna['dot_name']:
                         #We hit a team member
