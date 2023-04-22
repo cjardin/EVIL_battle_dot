@@ -24,5 +24,4 @@ class dot_actor:
 
     def post_event(self, event_name):
         self.new_behavior(event_name)
-        logger.debug(event_name)
 

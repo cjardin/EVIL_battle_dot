@@ -108,7 +108,24 @@ def load_players():
             sys.exit()
 
 def post_event(event, dot_id):
-    dot_objects[ dot_id ].post_event( event )
+    try:
+        target = dot_objects[ dot_id ].dna['onEvents'][event]['target']
+    except:
+        #dot does not support that event
+        return
+
+    name = dot_objects[ dot_id ].dna['dot_name']
+
+    if target == 'self':
+        dot_objects[ dot_id ].post_event( event )
+    else:
+        for dot in dot_objects:
+            dot = dot_objects[dot]
+            if dot.dna['dot_name'] == name:
+                if target == 'some' and random.random() > .9:
+                    dot.post_event( event )
+            else:
+                dot.post_event( event )
 
 def play_game(screen):
     cur = con.cursor()
@@ -121,7 +138,6 @@ def play_game(screen):
 
         dot_keys = list(dot_objects.keys())
         shuffle( dot_keys )
-        logger.debug(len(dot_keys))
         deleted = []
         for did in dot_keys:
             if did in deleted:
@@ -175,6 +191,7 @@ def play_game(screen):
                             deleted.append( c_row[2] )
                             dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['kills'] = dot_score_board[dot_objects[ row[4] ].dna['dot_name']]['kills'] + 1
                             dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['alive'] = dot_score_board[dot_objects[  c_row[2] ].dna['dot_name']]['alive'] - 1
+                            post_event('on_kill', row[4])
                             del dot_objects[ c_row[2] ]
                     
                 if skip_insert == False:
