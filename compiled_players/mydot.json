@@ -1,13 +1,13 @@
 {
     "onEvents": {
         "on_start": {
-            "actor": "killer",
+            "actor": "rumba",
             "params": [
                 1.1
             ]
         },
         "on_spawn": {
-            "actor": "rumba",
+            "actor": "killer",
             "params": [
                 1.2,
                 1.3
@@ -16,5 +16,5 @@
         }
     },
     "dot_name": "mydot",
-    "dot_emoji": "😊"
+    "dot_emoji": "💥"
 }

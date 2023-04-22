@@ -20,6 +20,7 @@ import json
 import uuid
 
 import traceback
+import time
 
 
 from dot_actor import dot_actor
@@ -103,6 +104,7 @@ def post_event(event, dot_id):
 def play_game(screen):
     cur = con.cursor()
     while True:
+        loop_start = time.time()
         screen.clear()
         for row in cur.execute(configs['sql']['get_all_screen_to_print']):
             screen.print_at(row[2] , row[0], row[1], colour=7)
@@ -150,7 +152,8 @@ def play_game(screen):
                 if skip_insert == False:
                     cur.execute(f"""update main_game_field set X = {row[2]} , Y = {row[3]} where d_id = '{did}'""")
             cur.execute("delete from engine_orders")
-        time.sleep(.1)
+        if time.time() - loop_start < .5:
+            time.sleep(.1)
         con.commit()
 
 
