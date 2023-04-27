@@ -1,5 +1,4 @@
 pip install -r requirments.txt <br>
-antlr4-parse battle_dot.g4 start -tree test.bdot <br>
 antlr4 -Dlanguage=Python3 -visitor battle_dot.g4<br>
 python run_tests.py <br>
 python compile_players.py<br>
