@@ -1,0 +1,20 @@
+{
+    "onEvents": {
+        "on_start": {
+            "actor": "rumba",
+            "params": [
+                1.1
+            ]
+        },
+        "on_spawn": {
+            "actor": "rumba",
+            "params": [
+                1.2,
+                1.3
+            ],
+            "target": "all"
+        }
+    },
+    "dot_name": "spiral",
+    "dot_emoji": "😵"
+}
