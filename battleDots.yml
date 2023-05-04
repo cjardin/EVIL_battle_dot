@@ -1,6 +1,6 @@
 env:
-    width: 50
-    height: 30
+    width: 210
+    height: 50
     dbfile: ':memory:'
     food_amount: .1
     food_char: '🌳'
