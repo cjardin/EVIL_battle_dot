@@ -16,6 +16,7 @@ battle_dotLexer.tokens
 battle_dotListener.py
 battle_dotParser.py
 battle_dotVisitor.py
+logfile.log
 
 # Distribution / packaging
 .Python
