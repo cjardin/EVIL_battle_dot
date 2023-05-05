@@ -3,7 +3,7 @@ env:
     height: 30
     dbfile: ':memory:'
     food_amount: .1
-    food_char: 'T'
+    food_char: '🌳'
     player_dir: 'compiled_players/*.json'
 
 sql:
@@ -14,7 +14,7 @@ sql:
             "CREATE INDEX own_o on owner(owner_id)",
             "CREATE INDEX own_n on owner(name)",
             "CREATE TABLE engine_orders( src_x int, src_y int, dst_x int, dst_y int , action text , d_id text)",
-            "INSERT into owner values ( 0, 'Food', 'T');"
+            "INSERT into owner values ( 0, 'Food', '🌳');"
             ]
     place_food: "INSERT INTO main_game_field values ( !!X , !!Y, (select owner_id from owner where name='Food'), FALSE, null )"
     get_all_screen_to_print: "SELECT x, y, what_to_print from main_game_field a, owner b  where a.owner_id = b.owner_id"
