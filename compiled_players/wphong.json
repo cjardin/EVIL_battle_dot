@@ -2,16 +2,11 @@
     "onEvents": {
         "on_start": {
             "actor": "rumba",
-            "params": [
-                1.1
-            ]
+            "params": []
         },
         "on_spawn": {
-            "actor": "rumba",
-            "params": [
-                1.2,
-                1.3
-            ],
+            "actor": "wphongbehav",
+            "params": [],
             "target": "all"
         }
     },

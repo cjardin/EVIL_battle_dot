@@ -1,5 +1,5 @@
 dot_name: wphong;
 dot_emoji: 😼;
-on_start: rumba ();
-on_spawn: mybehav (1.2, 1.3) -> all;
+on_start: rumba();
+on_spawn: wphongbehav() -> all;
 
