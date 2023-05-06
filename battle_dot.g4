@@ -13,11 +13,9 @@ on_stmt : ON_STMT_NAMES ':'  BEHAVIOR_NAMES  '(' (VALUE (',' VALUE)*)?  ')'  ('-
 
 
 ON_STMT_NAMES : 'on_start' | 'on_spawn' | 'on_lost_a_battle' | 'on_kill';
-<<<<<<< HEAD
-BEHAVIOR_NAMES : 'rumba' | 'killer' ;
-=======
+
 BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' | 'kupcakinator';
->>>>>>> origin/main
+
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
 EMOJI : [\p{Emoji}] ;
