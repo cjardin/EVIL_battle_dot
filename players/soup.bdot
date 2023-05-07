@@ -1,4 +1,4 @@
-dot_name: dab_bot;
+dot_name: soup_bot;
 dot_emoji: 🍲 ;
 on_start: soup ();
 on_spawn: killer () -> all;
