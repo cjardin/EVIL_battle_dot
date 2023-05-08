@@ -1,0 +1,5 @@
+dot_name: ninja_bot;
+dot_emoji: 🥷 ;
+on_start: ninja ();
+on_spawn: killer () -> all;
+
