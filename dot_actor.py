@@ -1,7 +1,7 @@
 import random
 import logging
 import importlib
-
+#test comment for initial commit
 logger = logging.getLogger()
 
 class dot_actor:
