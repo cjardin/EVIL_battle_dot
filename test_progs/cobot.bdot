@@ -1,0 +1,6 @@
+dot_name: cobot;
+dot_emoji: 🤕;
+on_start: cob ();
+on_spawn: cob () -> all;
+on_kill: killer () -> self;
+on_lost_a_battle: rumba () -> all;
