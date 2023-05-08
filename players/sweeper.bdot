@@ -1,5 +1,5 @@
 dot_name: Elian_dot;
-dot_emoji: 🦠 ;
+dot_emoji: 🐇 ;
 on_start: sweep(1.1);
 on_spawn: sweep(1.2, 1.3) -> all;
 on_kill: killer(1.2, 1.3) -> all;
