@@ -18,6 +18,7 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato';
 
+
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
 EMOJI : [\p{Emoji}] ;
