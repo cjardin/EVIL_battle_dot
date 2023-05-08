@@ -1,0 +1,4 @@
+dot_name: thisisBaguette;
+dot_emoji: 🥖;
+on_start: thisisbaguette (1.4 , 2.5, 4.3) -> all;
+on_spawn: killer () -> all;
