@@ -1,5 +1,5 @@
 dot_name: griddy_bot;
-dot_emoji: 🥇 ;
+dot_emoji: 🐐 ;
 on_start: griddy ();
 on_spawn: killer () -> all;
 
