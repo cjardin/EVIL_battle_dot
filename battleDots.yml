@@ -1,6 +1,6 @@
 env:
-    width: 210
-    height: 50
+    width: 50
+    height: 30
     dbfile: ':memory:'
     food_amount: .1
     food_char: '🌳'
@@ -23,5 +23,3 @@ sql:
     set_initial_pos: "INSERT INTO main_game_field values ( !!X , !!Y, (select owner_id from owner where name='!!_name'), FALSE, '!!UUID')"
     del_initl_pos: "DELETE from main_game_field  where x = !!X  and y = !!Y"
     get_move_actions: "select src_x , src_y , dst_x, dst_y, d_id  from engine_orders where abs( src_x - dst_x) <= 1 and abs( src_y - dst_y) <= 1 and dst_x >= 0 and dst_x <= !!max_x and dst_y >= 0 and dst_y <= !!max_y"
-
-
