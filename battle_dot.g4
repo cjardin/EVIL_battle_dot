@@ -13,10 +13,13 @@ on_stmt : ON_STMT_NAMES ':'  BEHAVIOR_NAMES  '(' (VALUE (',' VALUE)*)?  ')'  ('-
 
 
 ON_STMT_NAMES : 'on_start' | 'on_spawn' | 'on_lost_a_battle' | 'on_kill';
+
 BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' | 
   'kupcakinator'| 'beeg' | 'ninja' |  'tree_hugger' | 
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
-  'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato';
+  'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
+  'cesca';
+
 
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
