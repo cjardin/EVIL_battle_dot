@@ -1,0 +1,4 @@
+dot_name: freeze;
+dot_emoji: 🧊;
+on_start: freeze ();
+on_spawn: killer () -> all;

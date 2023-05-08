@@ -18,7 +18,7 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'kupcakinator'| 'beeg' | 'ninja' |  'tree_hugger' | 
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
-  'cesca' | 'silly' | 'soup' ;
+  'cesca' | 'silly' | 'soup' | 'freeze' ;
 
 
 TARGETS : 'all' | 'self' | 'some';
