@@ -1,0 +1,5 @@
+dot_name: cesca;
+dot_emoji: í;
+on_start: rumba();
+on_spawn: killer() -> some;
+on_kill: cesca();
