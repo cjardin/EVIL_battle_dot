@@ -1,4 +1,4 @@
-dot_name: croissantlover;
+dot_name: croissantlover_bot;
 dot_emoji: 🥐;
 on_start: croissantlover (4.0);
 on_spawn: killer (1.5, 1.8) -> all;
