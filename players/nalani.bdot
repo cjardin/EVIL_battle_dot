@@ -1,4 +1,0 @@
-dot_name: nalani;
-dot_emoji: 🥭 ;
-on_start: rumba ();
-on_spawn: killer (1.2, 1.3) -> all;
