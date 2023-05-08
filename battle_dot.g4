@@ -16,7 +16,7 @@ ON_STMT_NAMES : 'on_start' | 'on_spawn' | 'on_lost_a_battle' | 'on_kill';
 BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' | 
   'kupcakinator'| 'beeg' | 'ninja' |  'tree_hugger' | 
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
-  'croissantlover' | 'griddy' | 'griddykiller';
+  'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette';
 
 
 TARGETS : 'all' | 'self' | 'some';
