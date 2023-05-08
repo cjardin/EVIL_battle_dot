@@ -1,4 +1,5 @@
 dot_name: panda_bot;
 dot_emoji: 🐼 ;
 on_start: rumba();
-on_spawn: pandaWalk() -> all;
+on_kill: pandaWalk() -> some;
+on_spawn: killer() -> all;
