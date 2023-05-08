@@ -1,0 +1,7 @@
+dot_name: battle;
+dot_emoji:🤨;
+
+
+on_start: rumba(1.2) -> some;
+on_spawn: killer(1.2) -> all;
+on_spawn: getgood(1.2) -> all;
