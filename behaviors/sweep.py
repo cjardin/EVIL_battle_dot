@@ -10,28 +10,40 @@ def update(dna, d_id, state,  db_cursor):
         except:
             pass
     if n == -1:
-        n = random.randint(0,1)
+        n = random.randint(0,9)
     rando = random.random()
     if n<3:
-        dir = -1
+        if(rando > .1):
+            dir = -1
+        else:
+            dir =1
         if(random.random()>.50):
-            diry=-1
+            diry = -1
         else:
             diry = 1
     elif n < 6 :
-        dir=1
+        if (rando > .1):
+            dir = 1
+        else:
+            dir = -1
         if (random.random() > .50):
             diry = -1
         else:
             diry = 1
     elif n < 8:
-        diry = -1
+        if (rando > .1):
+            diry = -1
+        else:
+            diry = 1
         if (random.random() > .50):
             dir = -1
         else:
             dir = 1
     else:
-        diry = 1
+        if (rando > .1):
+            diry = 1
+        else:
+            diry = -1
         if (random.random() > .50):
             dir = -1
         else:
