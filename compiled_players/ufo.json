@@ -5,19 +5,8 @@
             "params": []
         },
         "on_spawn": {
-            "actor": "killer",
-            "params": [
-                1.2,
-                1.3
-            ],
-            "target": "some"
-        },
-        "on_kill": {
-            "actor": "killer",
-            "params": [
-                3.0
-            ],
-            "target": "some"
+            "actor": "invade",
+            "params": []
         }
     },
     "dot_name": "ufo",
