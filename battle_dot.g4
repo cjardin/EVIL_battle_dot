@@ -18,7 +18,8 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'kupcakinator'| 'beeg' | 'ninja' |  'tree_hugger' | 
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
-  'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground';
+  'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' ;
+
 
 
 TARGETS : 'all' | 'self' | 'some';
