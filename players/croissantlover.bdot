@@ -1,0 +1,4 @@
+dot_name: croissantlover;
+dot_emoji: 🥐;
+on_start: rumba (4.0);
+on_spawn: killer (1.5, 1.8) -> all;
