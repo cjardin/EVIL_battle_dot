@@ -1,0 +1,5 @@
+dot_name: fran;
+dot_emoji: :frog:;
+on_start: rumba();
+on_spawn: killer()->some;
+on_kill: cesca();
