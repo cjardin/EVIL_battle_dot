@@ -3,7 +3,7 @@ env:
     height: 30
     dbfile: ':memory:'
     food_amount: .1
-    food_char: '🌳'
+    food_char: 'o'
     player_dir: 'compiled_players/*.json'
 
 sql:
