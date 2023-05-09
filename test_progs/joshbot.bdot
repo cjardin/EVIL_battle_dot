@@ -1,0 +1,4 @@
+dot_name: joshbot;
+dot_emoji: 💻 ;
+on_start: josh (1.2);
+on_spawn: killer () -> all;
