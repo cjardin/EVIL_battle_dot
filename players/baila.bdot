@@ -1,5 +1,5 @@
 dot_name: bailadot;
-dot_emoji:❤️;
+dot_emoji:💥;
 on_start: rumba (2.2);
 on_spawn: killer (3.2, 1.6) -> all;
 on_kill: bailar();

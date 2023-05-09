@@ -1,5 +1,5 @@
 dot_name: tron_dot;
-dot_emoji: 🏍️;
+dot_emoji: 💥;
 on_start: tron(4.0);
 on_spawn: rumba(4.1, 4.2) -> all;
 on_kill: killer(4.3, 4.4);
