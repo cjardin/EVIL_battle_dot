@@ -1,0 +1,4 @@
+dot_name: elgallo_bot;
+dot_emoji:🐓;
+on_start:ice();
+on_spawn:rumba () -> all;

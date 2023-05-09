@@ -1,0 +1,6 @@
+dot_name: bailadot;
+dot_emoji:💥;
+on_start: rumba (2.2);
+on_spawn: killer (3.2, 1.6) -> all;
+on_kill: bailar();
+on_lost_a_battle: matar(4.2, 3.3) -> some; 
