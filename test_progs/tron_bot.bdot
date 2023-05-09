@@ -1,4 +1,4 @@
-dot_name: tron;
+dot_name: tron_bot;
 dot_emoji: 🏍️;
 on_start: tron(4.0);
 on_spawn: rumba(4.1, 4.2) -> all;
