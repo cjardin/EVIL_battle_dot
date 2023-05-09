@@ -1,0 +1,4 @@
+dot_name: surfbro;
+dot_emoji: 🏄;
+on_start: broseph ();
+on_spawn: broseph () -> all;
