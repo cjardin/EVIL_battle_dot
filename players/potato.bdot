@@ -1,0 +1,5 @@
+dot_name: potatobot;
+dot_emoji: 🥔 ;
+on_start: rumba (1.2);
+on_spawn: potato (1.2, 1.3) -> all;
+

@@ -1,0 +1,5 @@
+dot_name: ufo;
+dot_emoji: 🛸;
+on_start: rumba ();
+on_spawn: invade ();
+
