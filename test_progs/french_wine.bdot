@@ -1,4 +1,4 @@
 dot_name: french_wine_bot;
 dot_emoji:  🍷;
 on_start: french_wine(2.2);
-on_spawn: killer (1.1, 1.5) -> all;
+on_spawn: killer (1.2, 1.5) -> all;
