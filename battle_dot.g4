@@ -23,7 +23,6 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' |
   'bailar' | 'matar';
 
-
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
 EMOJI : [\p{Emoji}] ;
