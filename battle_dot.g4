@@ -20,7 +20,8 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
   'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
   'peterBdot' | 'sauropod' | 'invade' | 'wphongbehav' | 'swagBuddha' |
-  'ice' | 'elgallo' | 'whaler';
+  'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' |
+  'bailar' | 'matar' | 'budder' | 'whaler';
 
 
 TARGETS : 'all' | 'self' | 'some';
