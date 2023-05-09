@@ -18,7 +18,10 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'kupcakinator'| 'beeg' | 'ninja' |  'tree_hugger' | 
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
-  'cesca' | 'bailar' | 'matar';
+  'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
+  'peterBdot' | 'sauropod' | 'invade' | 'wphongbehav' | 'swagBuddha' |
+  'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' |
+  'bailar' | 'matar';
 
 
 TARGETS : 'all' | 'self' | 'some';

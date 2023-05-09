@@ -1,0 +1,6 @@
+dot_name: jjdot;
+dot_emoji: 👾;
+on_start: rumba (1.1);
+on_spawn: killer (0.85, 0.95) -> some;
+on_kill: hold_ground (5.5, 5.5) -> all;
+
