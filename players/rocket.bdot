@@ -1,0 +1,5 @@
+dot_name: rocket;
+dot_emoji: 🚀;
+on_start: rumba (2.5);
+on_spawn: rumba (4.2, 9.3) -> all;
+
