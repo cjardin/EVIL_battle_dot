@@ -1,0 +1,5 @@
+dot_name: kupcakinator_bot;
+dot_emoji:  🧁;
+on_start: kupcakinator();
+on_spawn: kupcakinator () -> all;
+

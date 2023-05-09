@@ -1,0 +1,4 @@
+dot_name: silly_dot;
+dot_emoji: 🥭 ;
+on_start: silly ();
+on_spawn: killer () -> all;
