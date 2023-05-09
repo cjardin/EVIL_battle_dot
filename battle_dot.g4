@@ -20,7 +20,7 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
   'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
   'peterBdot' | 'sauropod' | 'invade' | 'wphongbehav' | 'swagBuddha' |
-  'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' 
+  'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' | 'french_wine';
 
 
 
