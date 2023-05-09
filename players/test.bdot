@@ -1,5 +1,0 @@
-dot_name: mydot;
-dot_emoji: 💥 ;
-on_start: rumba (1.1);
-on_spawn: killer (1.2, 1.3) -> all;
-

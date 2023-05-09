@@ -1,5 +1,5 @@
 import random
-#this is a behavior 
+#this is a copy of behavior beeg 
 def update(dna, d_id, state,  db_cursor):
     my_dots = state
     rows = db_cursor.execute(f"select x,y from main_game_field where is_flag = FALSE and  d_id = '{d_id}'")
