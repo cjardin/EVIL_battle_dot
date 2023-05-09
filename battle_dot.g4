@@ -20,7 +20,8 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
   'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
   'peterBdot' | 'sauropod' | 'invade' | 'wphongbehav' | 'swagBuddha' |
-  'ice' | 'elgallo' | 'warrior' | 'worker';
+  'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron';
+
 
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
