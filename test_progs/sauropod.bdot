@@ -1,0 +1,6 @@
+dot_name: sauropoddot;
+dot_emoji: 🦕;
+on_start: rumba();
+on_spawn: sauropod() -> some;
+on_lost_a_battle: sauropod() -> some;
+on_kill: killer() -> all;

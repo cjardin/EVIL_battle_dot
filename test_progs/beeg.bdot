@@ -1,0 +1,5 @@
+dot_name: beeg_bot;
+dot_emoji: 🦍 ;
+on_start: beeg ();
+on_spawn: killer () -> all;
+

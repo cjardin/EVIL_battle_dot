@@ -1,0 +1,7 @@
+dot_name: ninja_bot;
+dot_emoji: 🥷 ;
+on_start:           ninja (2.0);
+on_kill:            ninja (4.0);
+on_lost_a_battle:   ninja (1.0);
+on_spawn:           ninja (1.5, 1.5) -> all;
+

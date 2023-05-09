@@ -1,0 +1,5 @@
+dot_name: hotdog;
+dot_emoji: 🌭 ;
+on_start: rumba ();
+on_spawn: killer () -> all;
+
