@@ -1,0 +1,8 @@
+dot_name: drywall;
+dot_emoji: 🧧 ;
+on_start: rumba (1.5);
+on_spawn: worker () -> self;
+on_kill: killer () -> self;
+on_lost_a_battle: worker (0.3) -> all;
+
+
