@@ -1,4 +1,0 @@
-dot_name: DVDbot;
-dot_emoji: 💿 ;
-on_start: rumba ();
-on_spawn: DVD () -> all;

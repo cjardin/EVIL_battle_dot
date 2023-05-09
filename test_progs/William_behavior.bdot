@@ -1,5 +1,0 @@
-dot_name: William_behavior_bot;
-dot_emoji:  🥖;
-on_start: William_behavior();
-on_spawn: William_behavior () -> all;
-

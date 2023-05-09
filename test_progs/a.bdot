@@ -1,0 +1,5 @@
+dot_name: a_bot;
+dot_emoji: 👍 ;
+on_start: a ();
+on_spawn: rumba () -> all;
+

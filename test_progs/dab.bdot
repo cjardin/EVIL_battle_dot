@@ -1,5 +1,0 @@
-dot_name: dab_bot;
-dot_emoji: 🫡 ;
-on_start: dab ();
-on_spawn: killer () -> all;
-
