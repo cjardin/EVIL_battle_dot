@@ -1,0 +1,4 @@
+dot_name: kspec;
+dot_emoji: 🤠;
+on_start: khunt();
+on_spawn: khunt();
