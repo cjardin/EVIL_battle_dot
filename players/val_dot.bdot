@@ -1,0 +1,4 @@
+dot_name: val_dot;
+dot_emoji: 🦗 ;
+on_start: rumba ();
+on_spawn: val () -> all;
