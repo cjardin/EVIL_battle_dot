@@ -19,8 +19,7 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'William_behavior' | 'squid' | 'monolith' | 'cob' |
   'croissantlover' | 'griddy' | 'griddykiller' | 'thisisbaguette' | 'sweep' | 'potato' |
   'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
-  'peterBdot';
-
+  'peterBdot' | 'sauropod';
 
 
 
