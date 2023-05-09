@@ -1,7 +1,0 @@
-dot_name: budder_bot;
-dot_emoji:  🧈;
-on_start: budder();
-on_spawn: budder() -> all;
-on_lost_a_battle: budder();
-on_kill: budder();
-
