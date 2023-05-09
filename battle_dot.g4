@@ -21,7 +21,8 @@ BEHAVIOR_NAMES : 'rumba' | 'killer' | 'dab' | 'DVD' | 'jasonX' |
   'cesca' | 'silly' | 'soup' | 'freeze' | 'hold_ground' |'pandaWalk' | 'newt'  |
   'peterBdot' | 'sauropod' | 'invade' | 'wphongbehav' | 'swagBuddha' |
   'ice' | 'elgallo' | 'warrior' | 'worker' | 'tron' | 'rook' |
-  'bailar' | 'matar' | 'budder' | 'whaler' | 'val' |  'getgood' | 'french_wine' | 'josh' ;
+  'bailar' | 'matar' | 'budder' | 'whaler' | 'val' |  'getgood' | 'french_wine' | 'khunt' |
+  'josh' ;
 
 TARGETS : 'all' | 'self' | 'some';
 NAME_ID : ('a'..'z' | 'A'..'Z' | '_')+;
