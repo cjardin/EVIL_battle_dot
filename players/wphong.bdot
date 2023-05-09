@@ -1,0 +1,5 @@
+dot_name: wphong;
+dot_emoji: 😼;
+on_start: rumba();
+on_spawn: wphongbehav() -> all;
+
