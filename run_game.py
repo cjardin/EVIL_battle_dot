@@ -21,6 +21,7 @@ import uuid
 
 import traceback
 import time
+import math 
 
 
 from dot_actor import dot_actor
@@ -78,6 +79,27 @@ def setup_game():
     for i in range( int( (GAME_WIDTH * GAME_HEIGHT) * configs['env']['food_amount'])):
         cur.execute(configs['sql']['place_food'].replace('!!X', str(randint(0,GAME_WIDTH))).replace('!!Y', str(randint(0,GAME_HEIGHT)) ))
 
+inital_flags = []
+
+def generate_init_pos():
+
+    while True:
+        init_pos = (randint(0,GAME_WIDTH), randint(0,GAME_HEIGHT))
+        too_close = False
+        for p in inital_flags:
+            dist = math.sqrt( math.pow( p[0] - init_pos[0] , 2) + math.pow( p[1] - init_pos[1] , 2) )
+
+            if dist < (GAME_WIDTH * .10):
+                too_close = True
+
+        if too_close == False:
+            inital_flags.append(init_pos)
+            break
+
+    return init_pos
+
+   
+
 
 def load_players():
     cur = con.cursor()
@@ -88,7 +110,7 @@ def load_players():
             with open(g, 'rb') as f:
                 dot_dna = json.loads(f.read())
 
-            init_pos = (randint(0,GAME_WIDTH), randint(0,GAME_HEIGHT))
+            init_pos = generate_init_pos() #(randint(0,GAME_WIDTH), randint(0,GAME_HEIGHT))
             dot_dna["MAX_X"] = GAME_WIDTH
             dot_dna["MAX_Y"] = GAME_HEIGHT
             dot_dna["flag_x_y"] = init_pos
