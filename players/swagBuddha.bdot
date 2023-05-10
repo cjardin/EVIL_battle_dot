@@ -1,4 +1,4 @@
 dot_name: swagBuddha_bot;
-dot_emoji: 🌫️;
+dot_emoji: 🦄 ; 
 on_start: rumba();
 on_spawn: rumba();
