@@ -40,6 +40,14 @@ class SurfBro:
         self.__cursor = cursor
 
     @property
+    def owner_id(self) -> str:
+        return self.__cursor.execute(
+            f"""
+            SELECT owner_id from main_game_field WHERE d_id = '{self.id}' LIMIT 1;
+            """
+        ).fetchone()[0]
+
+    @property
     def origin(self) -> Coordinates:
         return Coordinates(*self.__dna.get("init_pos"))
 
@@ -101,10 +109,19 @@ class BoardMaster:
             ).fetchall()
         ]
 
+    @property
+    def enemy_locations(self) -> List[Coordinates]:
+        return [
+            Coordinates(*coordinates)
+            for coordinates in self.__cursor.execute(
+                f"""
+                SELECT x,y from main_game_field WHERE is_flag = FALSE and owner_id != {self.__surf_bro.owner_id};
+                """
+            ).fetchall()
+        ]
+
     def closest_distance(self, targets: List[Coordinates]):
         source = self.__surf_bro.current_location
-        # if not len(targets) > 0:
-        #     return -1
         return numpy.argmin(
             [
                 math.sqrt(
@@ -117,9 +134,11 @@ class BoardMaster:
 
     def closest_food(self) -> Coordinates:
         index = self.closest_distance(self.food_locations)
-        # if index > -1:
         return self.food_locations[index]
-        # return self.__surf_bro.home_base
+
+    def closest_enemy(self) -> Coordinates:
+        index = self.closest_distance(self.enemy_locations)
+        return self.enemy_locations[index]
 
 
 def update(dna, d_id, state, db_cursor):
@@ -130,32 +149,19 @@ def update(dna, d_id, state, db_cursor):
 
     if len(board_master.food_locations) > 0:
         destination = board_master.closest_food()
-        destination = Coordinates(
-            destination.x - current_location.x,
-            destination.y - current_location.y,
-        )
+    elif len(board_master.enemy_locations) > 0:
+        destination = board_master.closest_enemy()
     else:
         destination = bro.home_base
 
-    # with open("hangry.txt", "a+") as f:
-    #     f.write(
-    #         f"""bro.enemy_locations ==> {board_master.enemy_locations}\n\n"""
-    #         # bro.historical_locations ==> {bro.location_history}
-    #         # bro.origin ==> {bro.origin}
-    #         # bro.screen_size ==> {bro.screen_size}
-    #         # bro.home_base ==> {bro.home_base}
-    #         # bro.current_location ==> {bro.current_location}
-    #         # board_master.closest_food ==> {closest_food}\n\n
-    #     )
-
     dx, dy = (0, 0)
-    if destination.x < 0:
+    if destination.x < current_location.x:
         dx = -1
-    if destination.x > 0:
+    if destination.x > current_location.x:
         dx = 1
-    if destination.y < 0:
+    if destination.y < current_location.y:
         dy = -1
-    if destination.y > 0:
+    if destination.y > current_location.y:
         dy = 1
 
     new_location = Coordinates(
